@@ -4,4 +4,3 @@ for i in range(9):
         if not(i == 8 and j == 9):
             print("{}{}".format(i, j), end=", ")
 print("{}{}".format(i, j))
-
