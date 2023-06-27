@@ -40,8 +40,8 @@ class Square:
                 self.__size = size
         else:
             raise TypeError("size must be an integer")
-        if not isinstance(position, tuple) or len(position) != 2 or any(not \
-        isinstance(element, int) or element < 0 for element in position):
+        if (not isinstance(position, tuple) or len(position) != 2 or
+                any(not isinstance(e, int) or e < 0 for e in position)):
             raise TypeError(err_mes)
         else:
             self.__position = position
@@ -87,8 +87,8 @@ class Square:
     def position(self, value):
         """property to set the position"""
         err_mes = "position must be a tuple of 2 positive integers"
-        if not isinstance(value, tuple) or len(value) != 2 or any(not \
-        isinstance(element, int) or element < 0 for element in value):
+        if (not isinstance(value, tuple) or len(value) != 2 or
+                any(not isinstance(e, int) or e < 0 for e in value)):
             raise TypeError(err_mes)
         else:
             self.__position = value
