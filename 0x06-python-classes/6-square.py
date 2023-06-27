@@ -8,7 +8,7 @@ Private instance attribute: size:
 - property setter def size(self, value): to set it:
     * size must be an integer, otherwise raise a TypeError exception with the
     message size must be an integer
-    * if size is less than 0, raise a ValueError exception with the message
+    * if size is less than 0, raise a Value Error exception with the message
     size must be >= 0
 Private instance attribute: position:
 - property def position(self): to retrieve it
@@ -84,7 +84,7 @@ class Square:
         return self.__position
 
     @size.setter
-    def size(self, valuee):
+    def size(self, value):
         """property to set the size"""
         if isinstance(value, int):
             if value < 0:
@@ -94,7 +94,7 @@ class Square:
         else:
             raise TypeError("size must be an integer")
 
-    @size.setter
+    @position.setter
     def position(self, value):
         """property to set the position"""
         err_mes = "position must be a tuple of 2 positive integers"
