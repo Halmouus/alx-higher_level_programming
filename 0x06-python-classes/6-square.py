@@ -40,22 +40,11 @@ class Square:
                 self.__size = size
         else:
             raise TypeError("size must be an integer")
-        if not isinstance(position, tuple):
-            err += 1
-        else:
-            if len(position) != 2:
-                err += 1
-            else:
-                for element in position:
-                    if not isinstance(element, int):
-                        err += 1
-                    else:
-                        if element < 0:
-                            err += 1
-        if err == 0:
-            self.__position = position
-        else:
+        if not isinstance(position, tuple) or len(position) != 2 or any(not \
+        isinstance(element, int) or element < 0 for element in position):
             raise TypeError(err_mes)
+        else:
+            self.__position = position
 
     def area(self):
         """returns the current square area"""
@@ -98,20 +87,8 @@ class Square:
     def position(self, value):
         """property to set the position"""
         err_mes = "position must be a tuple of 2 positive integers"
-        err = 0
-        if not isinstance(value, tuple):
-            err += 1
-        else:
-            if len(value) != 2:
-                err += 1
-            else:
-                for element in value:
-                    if not isinstance(element, int):
-                        err += 1
-                    else:
-                        if element < 0:
-                            err += 1
-        if err == 0:
-            self.__position = value
-        else:
+        if not isinstance(value, tuple) or len(value) != 2 or any(not \
+        isinstance(element, int) or element < 0 for element in value):
             raise TypeError(err_mes)
+        else:
+            self.__position = value
