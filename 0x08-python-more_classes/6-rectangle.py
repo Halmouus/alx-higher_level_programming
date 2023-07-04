@@ -5,7 +5,6 @@
 class Rectangle:
     """class for the Rectangle object"""
 
-    """Number of instances"""
     number_of_instances = 0
 
     def __init__(self, width=0, height=0):
