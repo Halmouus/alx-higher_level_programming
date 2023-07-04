@@ -6,15 +6,21 @@ This module creates a class Rectangle that defines a rectangle by:
 Private instance attribute: width:
  -property def width(self): to retrieve it
  -property setter def width(self, value): to set it:
-    *width must be an integer, otherwise raise a TypeError exception with the message width must be an integer
-    *if width is less than 0, raise a ValueError exception with the message width must be >= 0
+    *width must be an integer, otherwise raise a TypeError exception
+    with the message width must be an integer
+    *if width is less than 0, raise a ValueError exception with the
+    message width must be >= 0
 Private instance attribute: height:
  -property def height(self): to retrieve it
  -property setter def height(self, value): to set it:
-    *height must be an integer, otherwise raise a TypeError exception with the message height must be an integer
-    *if height is less than 0, raise a ValueError exception with the message height must be >= 0
-Instantiation with optional width and height: def __init__(self, width=0, height=0):
+    *height must be an integer, otherwise raise a TypeError exception with
+    the message height must be an integer
+    *if height is less than 0, raise a ValueError exception with the message
+    height must be >= 0
+Instantiation with optional width and height:
+def __init__(self, width=0, height=0):
 """
+
 
 class Rectangle:
     """class for the Rectangle object"""
@@ -33,7 +39,7 @@ class Rectangle:
                 self.__height = height
         else:
             raise TypeError("height must be an integer")
-    
+
     @property
     def height(self):
         """property to retrieve the height"""
@@ -43,7 +49,7 @@ class Rectangle:
     def width(self):
         """property to retrieve the width"""
         return self.width
-    
+
     @width.setter
     def width(self, value):
         """property to set the width"""
@@ -65,4 +71,3 @@ class Rectangle:
                 self.__height = value
         else:
             raise TypeError("height must be an integer")
-           
