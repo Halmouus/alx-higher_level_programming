@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""6. How many instances"""
+"""6. How many instances
+This is the "Rectangle"  module.
+
+This module provides a Rectangle class."""
 
 
 class Rectangle:
