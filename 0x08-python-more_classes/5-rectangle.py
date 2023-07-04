@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""5. Detect instance deletion"""
+"""4. Eval is magic"""
 
 
 class Rectangle:
@@ -40,10 +40,6 @@ class Rectangle:
     def __repr__(self):
         """String representation of the rectangle for eval"""
         return f"Rectangle({self.__width}, {self.__height})"
-
-    def __del__(self):
-        """Prints a message when a rectangle is deleted"""
-        print("Bye rectangle... ")
 
     @property
     def height(self):
