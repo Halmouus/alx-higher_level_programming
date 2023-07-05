@@ -5,8 +5,20 @@
 class Rectangle:
     """class for the Rectangle object"""
     def __init__(self, width=0, height=0):
-        self.width = width
-        self.height = height
+        if isinstance(width, int):
+            if width < 0:
+                raise ValueError("width must be >= 0")
+            else:
+                self.__width = width
+        else:
+            raise TypeError("width must be an integer")
+        if isinstance(height, int):
+            if height < 0:
+                raise ValueError("height must be >= 0")
+            else:
+                self.__height = height
+        else:
+            raise TypeError("height must be an integer")
 
     def area(self):
         """returns the current rectangle area"""
@@ -19,11 +31,12 @@ class Rectangle:
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """string format of a rectangle"""
-        if self.__width == 0 or self.__height == 0:
-            return ''
-        return ("#" * self.__width + "\n") * (self.__height - 1)\
-            + ("#" * self.__width)
+        strp = ""
+        for x in range(self.__height):
+            strp += ("#" * self.__width)
+            if x is not self.__height - 1:
+                strp += "\n"
+        return strp
 
     def __repr__(self):
         """String representation of the rectangle for eval"""
