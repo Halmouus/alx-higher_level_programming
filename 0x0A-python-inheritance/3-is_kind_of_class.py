@@ -17,4 +17,3 @@ def is_kind_of_class(obj, a_class):
     from, the specified classs ; otherwise False
     """
     return isinstance(obj, a_class)
-
