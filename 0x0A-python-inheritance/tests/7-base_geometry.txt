@@ -25,6 +25,10 @@ Testing area:
     TypeError: area() takes 1 positional argument but 2 were given
 
 Testing integer_validator
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+      ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
     >>> bg.integer_validator("my_int", 12)
     >>> bg.integer_validator("my_int", 'yes')
     Traceback (most recent call last):
@@ -59,3 +63,11 @@ Testing integer_validator
     Traceback (most recent call last):
       ...
     TypeError: my_int must be an integer
+    >>> bg.integer_validator("tuple", (12, "item"))
+    Traceback (most recent call last):
+      ...
+    TypeError: tuple must be an integer
+    >>> bg.integer_validator("dict", {})
+    Traceback (most recent call last):
+      ...
+    TypeError: dict must be an integer
