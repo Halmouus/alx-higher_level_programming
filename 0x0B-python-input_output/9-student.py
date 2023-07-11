@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """9. Student to JSON"""
-import json
 
 
 class Student:
