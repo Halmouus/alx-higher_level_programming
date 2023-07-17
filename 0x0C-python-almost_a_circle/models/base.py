@@ -26,7 +26,7 @@ class Base:
     @classmethod
     def id_list(cls):
         "prints list of ids"
-        print(cls.__id_list)
+        return Base.__id_list
 
     @classmethod
     def id_update(cls, old_id, new_id):

@@ -238,10 +238,10 @@ class RectangleTestCase(unittest.TestCase):
         rect.update(550, 256, 128, 10, 20, y=8, id=35, width=36, x=4, height=23)
         self.assertEqual(str(rect), "[Rectangle] (550) 10/20 - 256/128")
 
-    def test_o_update_1(self):
+    def test_o_update_2(self):
         "test update method #2 for Rectangle"
         rect_o = Rectangle(10, 10, 10, 10)
-        self.assertEqual(str(rect_o), "[Rectangle] (35) 10/10 - 10/10")
+        self.assertEqual(str(rect_o), "[Rectangle] (36) 10/10 - 10/10")
         with self.assertRaises(ValueError):
             rect_o.update(id=550)
         with self.assertRaises(TypeError):
