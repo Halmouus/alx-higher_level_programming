@@ -23,11 +23,15 @@ class Base:
             self.id = Base.__nb_objects
             Base.__id_list.append(self.id)
 
+    @classmethod
     def id_list(cls):
         "prints list of ids"
         print(cls.__id_list)
 
+    @classmethod
     def id_update(cls, old_id, new_id):
         "prints list of ids"
-        cls.__id_list.remove(old_id)
-        cls.__init__(new_id)
+        if old_id not in Base.__id_list:
+            return
+        Base.__id_list.remove(old_id)
+        Base.__init__(cls, new_id)

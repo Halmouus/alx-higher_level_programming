@@ -199,13 +199,13 @@ class RectangleTestCase(unittest.TestCase):
         r2 = Rectangle(10, 10, 10, 10)
         self.assertEqual(str(r2), "[Rectangle] (34) 10/10 - 10/10")
         with self.assertRaises(ValueError):
-            r2.update(33)
+            r2.update(32)
+        with self.assertRaises(TypeError):
+            r2.update(667, 'str')
         with self.assertRaises(ValueError):
             r2.update(667, 0)
         with self.assertRaises(ValueError):
             r2.update(667, -5)
-        with self.assertRaises(TypeError):
-            r2.update(667, 'str')
         with self.assertRaises(ValueError):
             r2.update(667, 1, 0)
         with self.assertRaises(ValueError):
@@ -216,6 +216,8 @@ class RectangleTestCase(unittest.TestCase):
             r2.update(667, 1, 2, -4)
         with self.assertRaises(ValueError):
             r2.update(667, 1, 2, 3, -5)
+        with self.assertRaises(IndexError):
+            r2.update(667, 1, 2, 3, 4, 5, 6)
 
 
 if __name__ == '__main__':
