@@ -63,7 +63,7 @@ class BaseTestCase(unittest.TestCase):
         self.assertEqual(Base(['a', 'b', 'c']).id, ['a', 'b', 'c'])
         with self.assertRaises(ValueError):
             Base(['a', 'b', 'c'])
-        bs = Base('a', 1, 'str', 0, [0, 1, 2])
+        bs = Base(('a', 1, 'str', 0, [0, 1, 2]))
         self.assertEqual(bs.id, ('a', 1, 'str', 0, [0, 1, 2]))
         with self.assertRaises(ValueError):
             Base(('a', 1, 'str', 0, [0, 1, 2]))
