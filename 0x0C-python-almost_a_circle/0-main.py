@@ -1,32 +1,25 @@
 #!/usr/bin/python3
-""" Doc """
+""" 8-main """
 from models.rectangle import Rectangle
-from models.base import Base
 
 if __name__ == "__main__":
 
-    r1 = Rectangle(10, 10, 10, 10)
-    Base.id_list()
-    r2 = Rectangle(5, 5, 5, 5, 89)
-    Base.id_list()
-    print("1", r1)
-    print("2", r2)
-    r2.update(809)
+    r1 = Rectangle(10, 10)
+    r2 = Rectangle(10, 10, 10, 10, 89)
     print(r1)
 
-    r1.update(89, 10)
+    r1.update(19, height=1)
     print(r1)
-    print(r2)
 
-    r1.update(45, 2, 3)
+    r1.update(width=1, wistrdssdsfdt=2)
     print(r1)
-    print(r2)
 
-    r1.update(36, 2, 3, 10)
+    r1.update(y=1, width=2, x=3, id=1)
     print(r1)
-    print(r2)
 
-    r1.update(14, 2, 3, 4, 5, 6)
+    r1.update(x=1, height=2, y=3, width=4)
     print(r1)
-    print(r2)
-    Base.id_list()
+    r1.update(550, 256, 128, 10, 20, y=8, id=35, width=36, x=4, height=23)
+    print(r1)
+    r2 = Rectangle(10, 10, 10, 10)
+    r2.update(id=550)

@@ -219,6 +219,48 @@ class RectangleTestCase(unittest.TestCase):
         with self.assertRaises(IndexError):
             r2.update(667, 1, 2, 3, 4, 5, 6)
 
+    def test_o_update_1(self):
+        "test update method #2 for Rectangle"
+        rect = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(rect), "[Rectangle] (35) 10/10 - 10/10")
+        rect.update()
+        self.assertEqual(str(rect), "[Rectangle] (35) 10/10 - 10/10")
+        rect.update(width=20)
+        self.assertEqual(str(rect), "[Rectangle] (35) 10/10 - 20/10")
+        rect.update(height=15, width=30)
+        self.assertEqual(str(rect), "[Rectangle] (35) 10/10 - 30/15")
+        rect.update(y=0, id=256, width=30)
+        self.assertEqual(str(rect), "[Rectangle] (256) 10/0 - 30/15")
+        rect.update(y=8, id=35, width=36, x=4, height=23)
+        self.assertEqual(str(rect), "[Rectangle] (35) 4/8 - 36/23")
+        rect.update(500, y=8, id=35, width=36, x=4, height=23)
+        self.assertEqual(str(rect), "[Rectangle] (500) 4/8 - 36/23")
+        rect.update(550, 256, 128, 10, 20, y=8, id=35, width=36, x=4, height=23)
+        self.assertEqual(str(rect), "[Rectangle] (550) 10/20 - 256/128")
+
+    def test_o_update_1(self):
+        "test update method #2 for Rectangle"
+        rect_o = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(rect_o), "[Rectangle] (35) 10/10 - 10/10")
+        with self.assertRaises(ValueError):
+            rect_o.update(id=550)
+        with self.assertRaises(TypeError):
+            rect_o.update(id=35, height='str')
+        with self.assertRaises(ValueError):
+            rect_o.update(height=0)
+        with self.assertRaises(ValueError):
+            rect_o.update(height=-5)
+        with self.assertRaises(ValueError):
+            rect_o.update(width=0)
+        with self.assertRaises(ValueError):
+            rect_o.update(width=-5)
+        with self.assertRaises(TypeError):
+            rect_o.update(width='str')
+        with self.assertRaises(ValueError):
+            rect_o.update(x=-4)
+        with self.assertRaises(ValueError):
+            rect_o.update(y=-5)
+
 
 if __name__ == '__main__':
     unittest.main()
