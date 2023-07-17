@@ -112,7 +112,7 @@ class Rectangle(Base):
     def update(self, *args, **kwargs):
         "updates a Rectangle object"
         attrs = ["id", "width", "height", "x", "y"]
-        if args and len(args) > 0 and args[0] != '': 
+        if args and len(args) > 0 and args[0] != '':
             for i, elem in enumerate(args):
                 if i == 0:
                     if args[0] != self.id:
