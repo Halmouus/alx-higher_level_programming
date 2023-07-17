@@ -116,4 +116,4 @@ class Rectangle(Base):
             if i == 0:
                 if args[0] != self.id:
                     super().id_update(self.id, args[i])
-            setattr(self, attrs[i], elem)            
+            setattr(self, attrs[i], elem)
