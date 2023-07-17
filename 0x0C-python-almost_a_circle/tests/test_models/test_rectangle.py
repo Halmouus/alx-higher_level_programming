@@ -177,6 +177,46 @@ class RectangleTestCase(unittest.TestCase):
         r2 = Rectangle(5, 10)
         self.assertEqual(str(r2), "[Rectangle] (32) 0/0 - 5/10")
 
+    def test_n_update_1(self):
+        "test update method of Recangle object"
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(r1), "[Rectangle] (33) 10/10 - 10/10")
+        r1.update()
+        self.assertEqual(str(r1), "[Rectangle] (33) 10/10 - 10/10")
+        r1.update(666)
+        self.assertEqual(str(r1), "[Rectangle] (666) 10/10 - 10/10")
+        r1.update(666, 2)
+        self.assertEqual(str(r1), "[Rectangle] (666) 10/10 - 2/10")
+        r1.update(666, 2, 3)
+        self.assertEqual(str(r1), "[Rectangle] (666) 10/10 - 2/3")
+        r1.update(666, 2, 3, 4)
+        self.assertEqual(str(r1), "[Rectangle] (666) 4/10 - 2/3")
+        r1.update(666, 2, 3, 4, 5)
+        self.assertEqual(str(r1), "[Rectangle] (666) 4/5 - 2/3")
+
+    def test_n_update_2(self):
+        "test special cases for update method of Recangle"
+        r2 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(r2), "[Rectangle] (34) 10/10 - 10/10")
+        with self.assertRaises(ValueError):
+            r2.update(33)
+        with self.assertRaises(ValueError):
+            r2.update(667, 0)
+        with self.assertRaises(ValueError):
+            r2.update(667, -5)
+        with self.assertRaises(TypeError):
+            r2.update(667, 'str')
+        with self.assertRaises(ValueError):
+            r2.update(667, 1, 0)
+        with self.assertRaises(ValueError):
+            r2.update(667, 1, -5)
+        with self.assertRaises(TypeError):
+            r2.update(667, 1, 'str')
+        with self.assertRaises(ValueError):
+            r2.update(667, 1, 2, -4)
+        with self.assertRaises(ValueError):
+            r2.update(667, 1, 2, 3, -5)
+
 
 if __name__ == '__main__':
     unittest.main()

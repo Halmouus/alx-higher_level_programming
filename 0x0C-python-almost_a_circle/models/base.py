@@ -10,8 +10,10 @@ class Base:
     def __init__(self, id=None):
         """Instantiation with id"""
         if id is not None:
+            if id < 0:
+                raise ValueError("id must be positive")
             if id in Base.__id_list:
-                raise ValueError(f"{id} already exists")
+                raise ValueError(f"id ({id}) already exists")
             self.id = id
             Base.__id_list.append(id)
         else:
@@ -20,3 +22,12 @@ class Base:
                 Base.__nb_objects += 1
             self.id = Base.__nb_objects
             Base.__id_list.append(self.id)
+
+    def id_list(cls):
+        "prints list of ids"
+        print(cls.__id_list)
+
+    def id_update(cls, old_id, new_id):
+        "prints list of ids"
+        cls.__id_list.remove(old_id)
+        cls.__init__(new_id)

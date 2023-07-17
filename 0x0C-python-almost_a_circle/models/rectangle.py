@@ -108,3 +108,12 @@ class Rectangle(Base):
         "string representation of a Rectangle object"
         return (f"[Rectangle] ({self.id}) {self.__x}/{self.__y}"
                 f" - {self.__width}/{self.__height}")
+
+    def update(self, *args):
+        "updates a Rectangle object"
+        attrs = ["id", "width", "height", "x", "y"]
+        for i, elem in enumerate(args):
+            if i == 0:
+                if args[0] != self.id:
+                    super().id_update(self.id, args[i])
+            setattr(self, attrs[i], elem)            
