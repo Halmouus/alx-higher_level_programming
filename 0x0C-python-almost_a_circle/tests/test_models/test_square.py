@@ -117,6 +117,16 @@ class SquareTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             Square(10, 1, 5).display(3)
 
+    def test_k_set_get_size(self):
+        "test height setters and getters"
+        sqr = Square(4)
+        self.assertEqual(sqr.size, 4)
+        sqr.size = 10
+        self.assertEqual(sqr.size, 10)
+        with self.assertRaises(TypeError):
+            sqr.size = '6'
+        with self.assertRaises(ValueError):
+            sqr.size = 0
 
 if __name__ == '__main__':
     unittest.main()
