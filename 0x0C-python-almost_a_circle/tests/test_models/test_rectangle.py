@@ -10,6 +10,11 @@ import io
 
 class RectangleTestCase(unittest.TestCase):
     """Test class for Rectangle class"""
+    @classmethod
+    def setUpClass(cls):
+        """clears the id queue for the upcoming tests"""
+        Base.id_reset()
+
     def test_a_positional_arguments(self):
         """Test positional argument validation"""
         with self.assertRaises(TypeError):

@@ -7,6 +7,7 @@ class Base:
     """class for the Base object"""
     __nb_objects = 0
     __id_list = []
+    __reset = False
 
     def __init__(self, id=None):
         """Instantiation with id"""
@@ -57,8 +58,20 @@ class Base:
 
     @classmethod
     def id_update(cls, old_id, new_id):
-        "prints list of ids"
+        "updates the list of ids"
         if old_id not in Base.__id_list:
             return
         Base.__id_list.remove(old_id)
         Base.__init__(cls, new_id)
+
+    @classmethod
+    def is_reset(cls):
+        "return True if Base is reset, otherwise False"
+        return Base.__reset
+
+    @classmethod
+    def id_reset(cls):
+        "resets the id count"
+        Base.__id_list.clear()
+        Base.__nb_objects = 0
+        Base.__reset = True
