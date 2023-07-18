@@ -7,11 +7,6 @@ from models.base import Base
 
 class BaseTestCase(unittest.TestCase):
     """Test class for Base class"""
-    @classmethod
-    def setUpClass(cls):
-        """clears the id queue for the upcoming tests"""
-        Base.id_reset()
-
     def test_a_id(self):
         """Test id coherence"""
         self.assertEqual(Base().id, 1)
