@@ -260,6 +260,19 @@ class RectangleTestCase(unittest.TestCase):
         self.assertEqual(str(r2), "[Rectangle] (37) 1/9 - 10/2")
         self.assertFalse(r1 == r2)
 
+    def test_q_json(self):
+        json_dictionary = Base.to_json_string(None)
+        r1 = Rectangle(10, 7, 2, 8)
+        self.assertEqual(json_dictionary, "[]")
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        exp_dict = {'x': 2, 'width': 10, 'id': 39, 'height': 7, 'y': 8}
+        exp_json = '[{"x": 2, "width": 10, "id": 39, "height": 7, "y": 8}]'
+        self.assertEqual(dictionary, exp_dict)
+        self.assertEqual(type(dictionary), dict)
+        self.assertEqual(json_dictionary, exp_json)
+        self.assertEqual(type(json_dictionary), str)
+
 
 if __name__ == '__main__':
     unittest.main()
