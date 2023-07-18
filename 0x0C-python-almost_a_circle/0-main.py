@@ -9,10 +9,9 @@ if __name__ == "__main__":
     print(s1.size)
     s1.size = 10
     print(s1)
-    s1.size = 'd'
-    print(s1)
-
     try:
-        s1.size = "9"
+        s1.size = -3
     except Exception as e:
         print("[{}] {}".format(e.__class__.__name__, e))
+    s1.size = 15
+    print(s1)
