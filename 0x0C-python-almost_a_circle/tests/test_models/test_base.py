@@ -51,6 +51,14 @@ class BaseTestCase(unittest.TestCase):
         with self.assertRaises(AttributeError):
             Base().__id_list
 
+    def test_h_json(self):
+        "Test json conversion method"
+        self.assertEqual(Base.to_json_string(None), "[]")
+        self.assertEqual(Base.to_json_string([]), "[]")
+        dictionary = {'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}
+        json_string = '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
+        self.assertEqual(Base.to_json_string([dictionary]), json_string)
+
 
 if __name__ == '__main__':
     unittest.main()
