@@ -10,10 +10,10 @@ class Base:
     def __init__(self, id=None):
         """Instantiation with id"""
         if id is not None:
+            if not isinstance(id, int):
+                raise TypeError("id must be an integer")
             if id < 0:
                 raise ValueError("id must be positive")
-            if id in Base.__id_list:
-                raise ValueError(f"id ({id}) already exists")
             self.id = id
             Base.__id_list.append(id)
         else:

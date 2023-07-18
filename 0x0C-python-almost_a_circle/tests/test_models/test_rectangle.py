@@ -25,21 +25,9 @@ class RectangleTestCase(unittest.TestCase):
         self.assertEqual(Rectangle(10, 9).id, 3)
         self.assertEqual(Rectangle(10, 9, 0, 0, 12).id, 12)
         self.assertEqual(Rectangle(10, 9, 0, 0).id, 4)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 3)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 1)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 12)
         self.assertEqual(Rectangle(10, 9, 0, 0, 5).id, 5)
         self.assertEqual(Rectangle(10, 9, 0, 0).id, 6)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 6)
         self.assertEqual(Rectangle(10, 9, 0, 0, 5000).id, 5000)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 3)
-        with self.assertRaises(ValueError):
-            Rectangle(10, 9, 0, 0, 5000)
 
     def test_b_width(self):
         """Test width value validation"""
@@ -198,8 +186,6 @@ class RectangleTestCase(unittest.TestCase):
         "test special cases for update method of Recangle"
         r2 = Rectangle(10, 10, 10, 10)
         self.assertEqual(str(r2), "[Rectangle] (34) 10/10 - 10/10")
-        with self.assertRaises(ValueError):
-            r2.update(32)
         with self.assertRaises(TypeError):
             r2.update(667, 'str')
         with self.assertRaises(ValueError):
@@ -243,8 +229,6 @@ class RectangleTestCase(unittest.TestCase):
         "test update method #2 for Rectangle"
         rect_o = Rectangle(10, 10, 10, 10)
         self.assertEqual(str(rect_o), "[Rectangle] (36) 10/10 - 10/10")
-        with self.assertRaises(ValueError):
-            rect_o.update(id=550)
         with self.assertRaises(TypeError):
             rect_o.update(id=35, height='str')
         with self.assertRaises(ValueError):
@@ -261,6 +245,20 @@ class RectangleTestCase(unittest.TestCase):
             rect_o.update(x=-4)
         with self.assertRaises(ValueError):
             rect_o.update(y=-5)
+
+    def test_p_dict_rep(self):
+        "test dictionary representation of a Rectangle"
+        r1 = Rectangle(10, 2, 1, 9)
+        self.assertEqual(str(r1), "[Rectangle] (37) 1/9 - 10/2")
+        r1_dictionary = r1.to_dictionary()
+        self.assertEqual(r1_dictionary, {'x': 1, 'y': 9, 'id': 37,
+                                         'height': 2, 'width': 10})
+        self.assertEqual(type(r1_dictionary), dict)
+        r2 = Rectangle(1, 1)
+        self.assertEqual(str(r2), "[Rectangle] (38) 0/0 - 1/1")
+        r2.update(**r1_dictionary)
+        self.assertEqual(str(r2), "[Rectangle] (37) 1/9 - 10/2")
+        self.assertFalse(r1 == r2)
 
 
 if __name__ == '__main__':

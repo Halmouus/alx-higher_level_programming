@@ -15,57 +15,33 @@ class BaseTestCase(unittest.TestCase):
         self.assertEqual(Base(12).id, 12)
         self.assertEqual(Base().id, 4)
 
-    def test_b_duplication(self):
-        """Test id coherence and duplication"""
-        with self.assertRaises(ValueError):
-            Base(3)
-        with self.assertRaises(ValueError):
-            Base(1)
-        with self.assertRaises(ValueError):
-            Base(12)
-        self.assertEqual(Base(5).id, 5)
-        self.assertEqual(Base().id, 6)
-        with self.assertRaises(ValueError):
-            Base(6)
-        self.assertEqual(Base(5000).id, 5000)
-        with self.assertRaises(ValueError):
-            Base(3)
-        with self.assertRaises(ValueError):
-            Base(5000)
-
     def test_c_special_values(self):
         """Test for special values output"""
-        self.assertEqual(Base().id, 7)
+        self.assertEqual(Base().id, 5)
         self.assertEqual(Base(0).id, 0)
-        self.assertEqual(Base(-1).id, -1)
         with self.assertRaises(ValueError):
             Base(-1)
-        self.assertEqual(Base().id, 8)
+        self.assertEqual(Base().id, 6)
 
     def test_d_special_values_2(self):
         """Test for special values output"""
-        self.assertEqual(Base().id, 9)
-        self.assertEqual(Base("str").id, 'str')
-        with self.assertRaises(ValueError):
+        self.assertEqual(Base().id, 7)
+        with self.assertRaises(TypeError):
             Base("str")
-        self.assertEqual(Base().id, 10)
+        self.assertEqual(Base().id, 8)
 
     def test_e_class_type(self):
         """Test for type and dictionary representation"""
         self.assertEqual(str(type(Base())), "<class 'models.base.Base'>")
-        self.assertEqual(Base().__dict__, {'id': 13})
+        self.assertEqual(Base().__dict__, {'id': 10})
 
     def test_f_special_values(self):
         """Test for special values output : lists and tuples"""
-        self.assertEqual(Base([10, 20, 30]).id, [10, 20, 30])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             Base([10, 20, 30])
-        self.assertEqual(Base(['a', 'b', 'c']).id, ['a', 'b', 'c'])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             Base(['a', 'b', 'c'])
-        bs = Base(('a', 1, 'str', 0, [0, 1, 2]))
-        self.assertEqual(bs.id, ('a', 1, 'str', 0, [0, 1, 2]))
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             Base(('a', 1, 'str', 0, [0, 1, 2]))
 
     def test_g_private_attribute_access(self):

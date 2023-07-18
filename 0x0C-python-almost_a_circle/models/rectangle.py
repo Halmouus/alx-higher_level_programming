@@ -112,7 +112,7 @@ class Rectangle(Base):
     def update(self, *args, **kwargs):
         "updates a Rectangle object"
         attrs = ["id", "width", "height", "x", "y"]
-        if args and len(args) > 0 and args[0] != '': 
+        if args and len(args) > 0 and args[0] != '':
             for i, elem in enumerate(args):
                 if i == 0:
                     if args[0] != self.id:
@@ -124,3 +124,13 @@ class Rectangle(Base):
                     if value != self.id:
                         super().id_update(self.id, value)
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        "dictionary representation of a Rectangle object"
+        return {
+            'x': self.x,
+            'y': self.y,
+            'id': self.id,
+            'height': self.height,
+            'width': self.width
+        }

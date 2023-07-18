@@ -24,21 +24,9 @@ class SquareTestCase(unittest.TestCase):
         self.assertEqual(Square(10).id, 3)
         self.assertEqual(Square(10, 0, 0, 12).id, 12)
         self.assertEqual(Square(10, 0, 0).id, 4)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 3)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 1)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 12)
         self.assertEqual(Square(10, 0, 0, 5).id, 5)
         self.assertEqual(Square(10, 0, 0).id, 6)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 6)
         self.assertEqual(Square(10, 0, 0, 5000).id, 5000)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 3)
-        with self.assertRaises(ValueError):
-            Square(10, 0, 0, 5000)
 
     def test_b_size(self):
         """Test size value validation"""
@@ -154,8 +142,6 @@ class SquareTestCase(unittest.TestCase):
         "test special cases for update method of Recangle"
         sqr2 = Square(10, 10, 10)
         self.assertEqual(str(sqr2), "[Square] (32) 10/10 - 10")
-        with self.assertRaises(ValueError):
-            sqr2.update(30)
         with self.assertRaises(TypeError):
             sqr2.update(667, 'str')
         with self.assertRaises(ValueError):
@@ -198,8 +184,6 @@ class SquareTestCase(unittest.TestCase):
         "test update method #2 for Square"
         sqr_o = Square(10, 10, 10)
         self.assertEqual(str(sqr_o), "[Square] (34) 10/10 - 10")
-        with self.assertRaises(ValueError):
-            sqr_o.update(id=550)
         with self.assertRaises(TypeError):
             sqr_o.update(id=33, size='str')
         with self.assertRaises(ValueError):
@@ -210,6 +194,20 @@ class SquareTestCase(unittest.TestCase):
             sqr_o.update(x=-4)
         with self.assertRaises(ValueError):
             sqr_o.update(y=-5)
+
+    def test_p_dict_rep(self):
+        "test dictionary representation of a Square"
+        s1 = Square(10, 1, 9)
+        self.assertEqual(str(s1), "[Square] (35) 1/9 - 10")
+        s1_dictionary = s1.to_dictionary()
+        self.assertEqual(s1_dictionary, {'x': 1, 'y': 9, 'id': 35,
+                                         'size': 10})
+        self.assertEqual(type(s1_dictionary), dict)
+        s2 = Square(1)
+        self.assertEqual(str(s2), "[Square] (36) 0/0 - 1")
+        s2.update(**s1_dictionary)
+        self.assertEqual(str(s2), "[Square] (35) 1/9 - 10")
+        self.assertFalse(s1 == s2)
 
 
 if __name__ == '__main__':

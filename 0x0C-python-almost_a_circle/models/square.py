@@ -40,3 +40,12 @@ class Square(Rectangle):
                     if value != self.id:
                         super().id_update(self.id, value)
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        "dictionary representation of a Square object"
+        return {
+            'id': self.id,
+            'x': self.x,
+            'size': self.size,
+            'y': self.y
+        }
