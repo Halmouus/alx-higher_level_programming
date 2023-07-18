@@ -31,7 +31,7 @@ class Base:
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
-
+    
     @staticmethod
     def from_json_string(json_string):
         """returns the list of the JSON string representation json_string"""
@@ -45,10 +45,10 @@ class Base:
         jsonfile = cls.__name__ + ".json"
         if list_objs is None:
             list_objs = []
-        jsonstr = cls.to_json_string([inst.to_dictionary()
-                                      for inst in list_objs])
+        jsonstr = cls.to_json_string([inst.to_dictionary() for inst in list_objs])
         with open(jsonfile, "w") as f:
             f.write(jsonstr)
+
 
     @classmethod
     def id_list(cls):
@@ -57,14 +57,8 @@ class Base:
 
     @classmethod
     def id_update(cls, old_id, new_id):
-        "updates the list of ids"
+        "prints list of ids"
         if old_id not in Base.__id_list:
             return
         Base.__id_list.remove(old_id)
         Base.__init__(cls, new_id)
-
-    @classmethod
-    def id_reset(cls):
-        "resets the id count"
-        Base.__id_list.clear()
-        Base.__nb_objects = 0
