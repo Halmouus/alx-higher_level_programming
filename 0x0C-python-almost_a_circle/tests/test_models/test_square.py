@@ -118,7 +118,7 @@ class SquareTestCase(unittest.TestCase):
             Square(10, 1, 5).display(3)
 
     def test_k_set_get_size(self):
-        "test height setters and getters"
+        "test size setters and getters"
         sqr = Square(4)
         self.assertEqual(sqr.size, 4)
         sqr.size = 10
@@ -127,6 +127,90 @@ class SquareTestCase(unittest.TestCase):
             sqr.size = '6'
         with self.assertRaises(ValueError):
             sqr.size = 0
+
+    def test_m_str(self):
+        "test string representation of Square object"
+        sqr1 = Square(4, 2, 1, 100)
+        self.assertEqual(str(sqr1), "[Square] (100) 2/1 - 4")
+        sqr2 = Square(10)
+        self.assertEqual(str(sqr2), "[Square] (30) 0/0 - 10")
+
+    def test_n_update_1(self):
+        "test update method of Recangle object"
+        sqr1 = Square(10, 10, 10)
+        self.assertEqual(str(sqr1), "[Square] (31) 10/10 - 10")
+        sqr1.update()
+        self.assertEqual(str(sqr1), "[Square] (31) 10/10 - 10")
+        sqr1.update(666)
+        self.assertEqual(str(sqr1), "[Square] (666) 10/10 - 10")
+        sqr1.update(666, 2)
+        self.assertEqual(str(sqr1), "[Square] (666) 10/10 - 2")
+        sqr1.update(666, 2, 4)
+        self.assertEqual(str(sqr1), "[Square] (666) 4/10 - 2")
+        sqr1.update(666, 2, 4, 5)
+        self.assertEqual(str(sqr1), "[Square] (666) 4/5 - 2")
+
+    def test_n_update_2(self):
+        "test special cases for update method of Recangle"
+        sqr2 = Square(10, 10, 10)
+        self.assertEqual(str(sqr2), "[Square] (32) 10/10 - 10")
+        with self.assertRaises(ValueError):
+            sqr2.update(30)
+        with self.assertRaises(TypeError):
+            sqr2.update(667, 'str')
+        with self.assertRaises(ValueError):
+            sqr2.update(667, 0)
+        with self.assertRaises(ValueError):
+            sqr2.update(667, -5)
+        with self.assertRaises(ValueError):
+            sqr2.update(667, 0)
+        with self.assertRaises(ValueError):
+            sqr2.update(667, -5)
+        with self.assertRaises(TypeError):
+            sqr2.update(667, 'str')
+        with self.assertRaises(ValueError):
+            sqr2.update(667, 2, -4)
+        with self.assertRaises(ValueError):
+            sqr2.update(667, 2, 3, -5)
+        with self.assertRaises(IndexError):
+            sqr2.update(667, 2, 3, 5, 6)
+
+    def test_o_update_1(self):
+        "test update method #2 for Square"
+        sqr = Square(10, 10, 10)
+        self.assertEqual(str(sqr), "[Square] (33) 10/10 - 10")
+        sqr.update()
+        self.assertEqual(str(sqr), "[Square] (33) 10/10 - 10")
+        sqr.update(size=20)
+        self.assertEqual(str(sqr), "[Square] (33) 10/10 - 20")
+        sqr.update(size=30)
+        self.assertEqual(str(sqr), "[Square] (33) 10/10 - 30")
+        sqr.update(y=0, id=256, size=30)
+        self.assertEqual(str(sqr), "[Square] (256) 10/0 - 30")
+        sqr.update(y=8, id=33, size=36, x=4)
+        self.assertEqual(str(sqr), "[Square] (33) 4/8 - 36")
+        sqr.update(500, y=8, id=33, size=36, x=4)
+        self.assertEqual(str(sqr), "[Square] (500) 4/8 - 36")
+        sqr.update(550, 256, 10, 20, y=8, id=33, size=36, x=4)
+        self.assertEqual(str(sqr), "[Square] (550) 10/20 - 256")
+
+    def test_o_update_2(self):
+        "test update method #2 for Square"
+        sqr_o = Square(10, 10, 10)
+        self.assertEqual(str(sqr_o), "[Square] (34) 10/10 - 10")
+        with self.assertRaises(ValueError):
+            sqr_o.update(id=550)
+        with self.assertRaises(TypeError):
+            sqr_o.update(id=33, size='str')
+        with self.assertRaises(ValueError):
+            sqr_o.update(size=0)
+        with self.assertRaises(ValueError):
+            sqr_o.update(size=-5)
+        with self.assertRaises(ValueError):
+            sqr_o.update(x=-4)
+        with self.assertRaises(ValueError):
+            sqr_o.update(y=-5)
+
 
 if __name__ == '__main__':
     unittest.main()
