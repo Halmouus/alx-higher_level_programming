@@ -28,18 +28,27 @@ class Square(Rectangle):
     def update(self, *args, **kwargs):
         "updates a Square object"
         attrs = ["id", "size", "x", "y"]
-        if args and len(args) > 0 and args[0] != '':
-            for i, elem in enumerate(args):
-                if i == 0:
-                    if elem != self.id:
-                        super().id_update(self.id, elem)
-                setattr(self, attrs[i], elem)
+        if args and len(args) > 0:
+            if isinstance(args[0], dict):
+                dictionary = args[0]
+                for key, value in dictionary.items():
+                    if key == "id":
+                        if value != self.id:
+                            super().id_update(self.id, value)
+                    setattr(self, key, value)
+            else:
+                for i, elem in enumerate(args):
+                    if i == 0:
+                        if elem != self.id:
+                            super().id_update(self.id, elem)
+                    setattr(self, attrs[i], elem)
         else:
             for key, value in kwargs.items():
                 if key == "id":
                     if value != self.id:
                         super().id_update(self.id, value)
                 setattr(self, key, value)
+
 
     def to_dictionary(self):
         "dictionary representation of a Square object"
