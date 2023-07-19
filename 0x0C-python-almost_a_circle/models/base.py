@@ -2,7 +2,6 @@
 """1. Base class module"""
 import json
 
-
 class Base:
     """class for the Base object"""
     __nb_objects = 0
@@ -62,6 +61,13 @@ class Base:
             return
         Base.__id_list.remove(old_id)
         Base.__init__(cls, new_id)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """returns an instance with all attributes already set"""
+        dummy = cls(1, 1)
+        dummy.update(dictionary)
+        return dummy
 
     @classmethod
     def id_reset(cls):
