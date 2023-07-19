@@ -31,8 +31,8 @@ class Square(Rectangle):
         if args and len(args) > 0 and args[0] != '':
             for i, elem in enumerate(args):
                 if i == 0:
-                    if args[0] != self.id:
-                        super().id_update(self.id, args[i])
+                    if elem != self.id:
+                        super().id_update(self.id, elem)
                 setattr(self, attrs[i], elem)
         else:
             for key, value in kwargs.items():
