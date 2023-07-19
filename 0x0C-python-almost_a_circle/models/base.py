@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """1. Base class module"""
 import json
+import os
 
 
 class Base:
@@ -51,6 +52,30 @@ class Base:
             f.write(jsonstr)
 
     @classmethod
+    def create(cls, **dictionary):
+        """returns an instance with all attributes already set"""
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        if cls.__name__ == "Square":
+            dummy = cls(1)
+        dummy.update(dictionary)
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances from json file"""
+        jsonfile = cls.__name__ + ".json"
+        jsonstr = ""
+        if not os.path.exists(jsonfile):
+            return []
+        with open(jsonfile, "r") as f:
+            jsonstr = f.read()
+        jsonlist = cls.from_json_string(jsonstr)
+        return [cls.create(**inst) for inst in jsonlist]
+        
+        
+
+    @classmethod
     def id_list(cls):
         "prints list of ids"
         return Base.__id_list
@@ -62,16 +87,7 @@ class Base:
             return
         Base.__id_list.remove(old_id)
         Base.__init__(cls, new_id)
-
-    @classmethod
-    def create(cls, **dictionary):
-        """returns an instance with all attributes already set"""
-        if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        if cls.__name__ == "Square":
-            dummy = cls(1)
-        dummy.update(dictionary)
-        return dummy
+        
 
     @classmethod
     def id_reset(cls):
