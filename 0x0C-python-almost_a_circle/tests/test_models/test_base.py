@@ -3,6 +3,7 @@
 """
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
 
 
 class BaseTestCase(unittest.TestCase):
@@ -57,12 +58,30 @@ class BaseTestCase(unittest.TestCase):
             Base().__id_list
 
     def test_h_json(self):
-        "Test json conversion method"
+        """Test json conversion method"""
         self.assertEqual(Base.to_json_string(None), "[]")
         self.assertEqual(Base.to_json_string([]), "[]")
         dictionary = {'x': 2, 'width': 10, 'id': 1, 'height': 7, 'y': 8}
         json_string = '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
         self.assertEqual(Base.to_json_string([dictionary]), json_string)
+
+    def test_i_from_json_string(self):
+        """Test from_json_string method of Base class"""
+        list_input = [{'id': 890, 'width': 10, 'height': 4},
+                      {'id': 7010, 'width': 1, 'height': 7}]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        list_format = [{'height': 4, 'width': 10, 'id': 890},
+                       {'height': 7, 'width': 1, 'id': 7010}]
+        json_format = ('[{"id": 890, "width": 10, "height": 4}, '
+                       '{"id": 7010, "width": 1, "height": 7}]')
+        self.assertEqual(Rectangle.from_json_string(None), [])
+        self.assertEqual(Rectangle.from_json_string(""), [])
+        self.assertEqual(type(list_input), list)
+        self.assertEqual(type(json_list_input), str)
+        self.assertEqual(type(list_output), list)
+        self.assertEqual(json_list_input, json_format)
+        self.assertEqual(list_output, list_format)
 
 
 if __name__ == '__main__':
