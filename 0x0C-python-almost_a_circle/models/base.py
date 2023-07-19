@@ -72,8 +72,6 @@ class Base:
             jsonstr = f.read()
         jsonlist = cls.from_json_string(jsonstr)
         return [cls.create(**inst) for inst in jsonlist]
-        
-        
 
     @classmethod
     def id_list(cls):
@@ -87,7 +85,6 @@ class Base:
             return
         Base.__id_list.remove(old_id)
         Base.__init__(cls, new_id)
-        
 
     @classmethod
     def id_reset(cls):
