@@ -2,6 +2,7 @@
 """1. Base class module"""
 import json
 
+
 class Base:
     """class for the Base object"""
     __nb_objects = 0
