@@ -5,6 +5,8 @@ from models.rectangle import Rectangle
 fisrtrect = Rectangle(5, 5, 5, 5)
 rect = Rectangle(10, 10, 10, 10)
 print(rect)
+rect.update()
+print(rect)
 rect.update(5)
 print(rect)
 rect.update(5, 4)

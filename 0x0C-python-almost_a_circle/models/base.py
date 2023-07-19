@@ -17,13 +17,15 @@ class Base:
             if id < 0:
                 raise ValueError("id must be positive")
             self.id = id
-            Base.__id_list.append(id)
+            if id not in Base.__id_list:
+                Base.__id_list.append(id)
         else:
             Base.__nb_objects += 1
             while(Base.__nb_objects in Base.__id_list):
                 Base.__nb_objects += 1
             self.id = Base.__nb_objects
-            Base.__id_list.append(self.id)
+            if self.id not in Base.__id_list:
+                Base.__id_list.append(self.id)
 
     @staticmethod
     def to_json_string(list_dictionaries):
@@ -56,8 +58,10 @@ class Base:
         """returns an instance with all attributes already set"""
         if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
+            Base.just_a_dummy()
         if cls.__name__ == "Square":
             dummy = cls(1)
+            Base.just_a_dummy()
         dummy.update(dictionary)
         return dummy
 
@@ -72,6 +76,16 @@ class Base:
             jsonstr = f.read()
         jsonlist = cls.from_json_string(jsonstr)
         return [cls.create(**inst) for inst in jsonlist]
+
+    @classmethod
+    def str_list(cls):
+        obj_list = cls.load_from_file()
+        if obj_list is None:
+            return []
+        str_list = []
+        for element in obj_list:
+            str_list.append(str(element))
+        return str_list
 
     @classmethod
     def id_list(cls):
@@ -91,3 +105,8 @@ class Base:
         "resets the id count"
         Base.__id_list.clear()
         Base.__nb_objects = 0
+
+    @classmethod
+    def just_a_dummy(cls):
+        """ignore count for a dummy instance"""
+        Base.__nb_objects -= 1

@@ -266,6 +266,7 @@ class RectangleTestCase(unittest.TestCase):
         self.assertFalse(r1 == r2)
 
     def test_q_json(self):
+        """test json convertor method for Rectangle"""
         json_dictionary = Base.to_json_string(None)
         r1 = Rectangle(10, 7, 2, 8)
         self.assertEqual(json_dictionary, "[]")
