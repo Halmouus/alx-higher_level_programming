@@ -2,7 +2,7 @@
 """1. Base class module"""
 import json
 import os
-
+import csv
 
 class Base:
     """class for the Base object"""
@@ -73,6 +73,29 @@ class Base:
         if not os.path.exists(jsonfile):
             return []
         with open(jsonfile, "r") as f:
+            jsonstr = f.read()
+        jsonlist = cls.from_json_string(jsonstr)
+        return [cls.create(**inst) for inst in jsonlist]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """writes the JSON string representation of list_objs to a csv file"""
+        csvfile = cls.__name__ + ".csv"
+        if list_objs is None:
+            list_objs = []
+        jsonstr = cls.to_json_string([inst.to_dictionary()
+                                      for inst in list_objs])
+        with open(csvfile, "w", encoding='UTF8', newline='') as f:
+            f.write(jsonstr)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """returns a list of instances from csv file"""
+        csvfile = cls.__name__ + ".csv"
+        jsonstr = ""
+        if not os.path.exists(csvfile):
+            return []
+        with open(csvfile, "r") as f:
             jsonstr = f.read()
         jsonlist = cls.from_json_string(jsonstr)
         return [cls.create(**inst) for inst in jsonlist]

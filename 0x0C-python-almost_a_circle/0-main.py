@@ -1,32 +1,42 @@
 #!/usr/bin/python3
-""" 15-main """
+""" 100-main """
 from models.rectangle import Rectangle
 from models.square import Square
-from models.base import Base
 
 if __name__ == "__main__":
 
-    Rectangle.save_to_file([Rectangle(3, 4), Rectangle(5, 8, 1), Rectangle(9, 1, 3, 2)])
-    with open("Rectangle.json", "r") as file:
-        print(file.read())
-    print(Rectangle.str_list())
-    Rectangle.save_to_file([Rectangle(3, 4), Rectangle(5, 8, 1), Rectangle(9, 1, 3, 2)])
-    with open("Rectangle.json", "r") as file:
-        print(file.read())
-    print(Rectangle.str_list())
-    Square.save_to_file(None)
-    with open("Square.json", "r") as file:
-        print(file.read())
-    print(Square.str_list())
-    Square.save_to_file([])
-    with open("Square.json", "r") as file:
-        print(file.read())
-    print(Square.str_list())
-    Square.save_to_file([Square(2), Square(4, 1), Square(7, 3, 4)])
-    with open("Square.json", "r") as file:
-        print(file.read())
-    print(Square.str_list())
-    Square.save_to_file([Square(2), Square(4, 1), Square(7, 3, 4)])
-    with open("Square.json", "r") as file:
-        print(file.read())
-    print(Square.str_list())
+    r1 = Rectangle(10, 7, 2, 8)
+    r2 = Rectangle(2, 4)
+    list_rectangles_input = [r1, r2]
+
+    Rectangle.save_to_file_csv(list_rectangles_input)
+    
+    list_rectangles_output = Rectangle.load_from_file_csv()
+
+    for rect in list_rectangles_input:
+        print("[{}] {}".format(id(rect), rect))
+
+    print("---")
+
+    for rect in list_rectangles_output:
+        print("[{}] {}".format(id(rect), rect))
+
+    print("---")
+    print("---")
+
+    s1 = Square(5)
+    s2 = Square(7, 9, 1)
+    list_squares_input = [s1, s2]
+
+    Square.save_to_file_csv(list_squares_input)
+
+    list_squares_output = Square.load_from_file_csv()
+
+    for square in list_squares_input:
+        print("[{}] {}".format(id(square), square))
+
+    print("---")
+
+    for square in list_squares_output:
+        print("[{}] {}".format(id(square), square))
+    
